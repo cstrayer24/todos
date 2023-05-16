@@ -11,7 +11,7 @@ function Home() {
     const req = await fetch("/api/get-user-todos");
 
     const res = await req.json();
-    const todoArr = [];
+    const todoArr = [] as never[];
 
     for (let i: number = 0; i < res.length; i++) {
       todoArr.push(
