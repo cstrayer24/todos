@@ -1,0 +1,43 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "cockroachdb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email    String @unique
+  password String
+  name     String
+
+  Session Session[]
+}
+
+model Session {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  expiresAt DateTime @db.Timestamptz()
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.Uuid
+
+  @@index([userId])
+}
+model Todo{
+
+
+  id String @id @default(dbgenerated("gen_random_uuid()"))@db.Uuid
+  name String
+  start String
+  expires String
+  userId    String   @db.Uuid
+
+  @@index([userId])
+}
