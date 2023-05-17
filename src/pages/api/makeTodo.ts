@@ -29,7 +29,7 @@ async function makeTodo(req: NextApiRequest, res: NextApiResponse) {
         start: starts,
         name: todoName,
         expires: expires,
-        userId: user?.id,
+        userId: user?.id as string,
       },
     });
   } catch (error) {

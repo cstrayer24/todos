@@ -15,11 +15,13 @@ function Home() {
 
     for (let i: number = 0; i < res.length; i++) {
       todoArr.push(
-        <Todo
-          name={res[i].name}
-          end={res[i].expires}
-          startDate={res[i].start}
-        />
+        (
+          <Todo
+            name={res[i].name}
+            end={res[i].expires}
+            startDate={res[i].start}
+          />
+        ) as never
       );
     }
 
@@ -33,7 +35,9 @@ function Home() {
     setExpries(new Date(expires).toLocaleDateString());
     newEl(
       el.concat(
-        <Todo name={todoName} end={new Date(expires).toLocaleDateString()} />
+        (
+          <Todo name={todoName} end={new Date(expires).toLocaleDateString()} />
+        ) as never
       )
     );
     const req = await fetch("/api/makeTodo", {
